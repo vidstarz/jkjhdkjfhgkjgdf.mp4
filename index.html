@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Auntie came over while I was at the gym 🏠💪</title>
+
+<style>
+
+\*{
+
+&#x20; box-sizing:border-box;
+
+&#x20; margin:0;
+
+&#x20; padding:0;
+
+}
+
+
+
+body{
+
+&#x20; min-height:100vh;
+
+&#x20; background:#07090e;
+
+&#x20; color:#fff;
+
+&#x20; font-family:Arial,sans-serif;
+
+&#x20; display:flex;
+
+&#x20; justify-content:center;
+
+&#x20; align-items:center;
+
+&#x20; padding:25px;
+
+}
+
+
+
+.container{
+
+&#x20; width:100%;
+
+&#x20; max-width:1100px;
+
+}
+
+
+
+.player-card{
+
+&#x20; width:100%;
+
+&#x20; padding:22px;
+
+&#x20; background:rgba(13,17,27,.95);
+
+&#x20; border:1px solid rgba(255,255,255,.12);
+
+&#x20; border-radius:24px;
+
+&#x20; box-shadow:0 25px 70px rgba(0,0,0,.75);
+
+}
+
+
+
+.video-box{
+
+&#x20; position:relative;
+
+&#x20; width:100%;
+
+&#x20; aspect-ratio:16/9;
+
+&#x20; overflow:hidden;
+
+&#x20; background:#000;
+
+&#x20; border-radius:18px;
+
+&#x20; cursor:pointer;
+
+}
+
+
+
+.video-box video{
+
+&#x20; position:absolute;
+
+&#x20; inset:0;
+
+&#x20; width:100%;
+
+&#x20; height:100%;
+
+&#x20; object-fit:contain;
+
+&#x20; background:#000;
+
+}
+
+
+
+.play-overlay{
+
+&#x20; position:absolute;
+
+&#x20; inset:0;
+
+&#x20; display:flex;
+
+&#x20; justify-content:center;
+
+&#x20; align-items:center;
+
+&#x20; background:rgba(0,0,0,.2);
+
+&#x20; pointer-events:none;
+
+&#x20; transition:.25s;
+
+}
+
+
+
+.play-circle{
+
+&#x20; width:82px;
+
+&#x20; height:82px;
+
+&#x20; border-radius:50%;
+
+&#x20; background:#e00000;
+
+&#x20; display:flex;
+
+&#x20; justify-content:center;
+
+&#x20; align-items:center;
+
+&#x20; box-shadow:0 0 35px rgba(255,0,0,.6);
+
+}
+
+
+
+.play-circle svg{
+
+&#x20; width:36px;
+
+&#x20; height:36px;
+
+&#x20; fill:#fff;
+
+&#x20; margin-left:5px;
+
+}
+
+
+
+.video-box.playing .play-overlay{
+
+&#x20; opacity:0;
+
+}
+
+
+
+.video-title{
+
+&#x20; margin-top:18px;
+
+&#x20; font-size:20px;
+
+&#x20; line-height:1.4;
+
+}
+
+
+
+.watch-btn{
+
+&#x20; width:100%;
+
+&#x20; margin-top:18px;
+
+&#x20; padding:16px;
+
+&#x20; border:0;
+
+&#x20; border-radius:12px;
+
+&#x20; background:linear-gradient(135deg,#e00000,#a00000);
+
+&#x20; color:#fff;
+
+&#x20; font-size:16px;
+
+&#x20; font-weight:bold;
+
+&#x20; cursor:pointer;
+
+}
+
+
+
+.watch-btn:hover{
+
+&#x20; opacity:.9;
+
+}
+
+
+
+.footer{
+
+&#x20; text-align:center;
+
+&#x20; margin-top:15px;
+
+&#x20; color:#64748b;
+
+&#x20; font-size:12px;
+
+}
+
+
+
+@media(max-width:600px){
+
+&#x20; body{
+
+&#x20;   padding:10px;
+
+&#x20; }
+
+
+
+&#x20; .player-card{
+
+&#x20;   padding:12px;
+
+&#x20;   border-radius:18px;
+
+&#x20; }
+
+
+
+&#x20; .video-title{
+
+&#x20;   font-size:16px;
+
+&#x20; }
+
+
+
+&#x20; .play-circle{
+
+&#x20;   width:65px;
+
+&#x20;   height:65px;
+
+&#x20; }
+
+}
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="player-card">
+
+    <div id="videoBox" class="video-box">
+
+      <video
+        id="videoPlayer"
+        playsinline
+        preload="metadata"
+        controls
+      >
+        <source
+          src="https://cdn2.videy.co/S1agsH7m1.mp4"
+          type="video/mp4">
+      </video>
+
+      <div id="playOverlay" class="play-overlay">
+        <div class="play-circle">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <h1 class="video-title">
+      Auntie came over while I was at the gym 🏠💪
+    </h1>
+
+    <button id="watchBtn" class="watch-btn">
+      ▶ Watch Online
+    </button>
+
+    <div class="footer">
+      Powered by VideoPlay
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const videoBox = document.getElementById("videoBox");
+
+const video = document.getElementById("videoPlayer");
+
+const watchBtn = document.getElementById("watchBtn");
+
+
+
+/\* Ganti dengan URL tujuan kamu \*/
+
+const targetUrl = "https://example.com/";
+
+
+
+function playVideo(){
+
+&#x20; video.play()
+
+&#x20;   .then(function(){
+
+&#x20;     videoBox.classList.add("playing");
+
+&#x20;     watchBtn.textContent = "⏸ Pause Video";
+
+&#x20;   })
+
+&#x20;   .catch(function(){
+
+&#x20;     videoBox.classList.remove("playing");
+
+&#x20;   });
+
+}
+
+
+
+videoBox.addEventListener("click", function(e){
+
+
+
+&#x20; if(e.target.closest("video")){
+
+&#x20;   return;
+
+&#x20; }
+
+
+
+&#x20; if(video.paused){
+
+&#x20;   playVideo();
+
+&#x20; }else{
+
+&#x20;   video.pause();
+
+&#x20; }
+
+
+
+});
+
+
+
+watchBtn.addEventListener("click", function(){
+
+
+
+&#x20; if(video.paused){
+
+&#x20;   playVideo();
+
+&#x20; }else{
+
+&#x20;   video.pause();
+
+&#x20; }
+
+
+
+&#x20; /\*
+
+&#x20;   Membuka URL secara jelas setelah klik tombol.
+
+&#x20;   Hapus komentar di bawah jika ingin mengaktifkannya.
+
+&#x20; \*/
+
+
+
+&#x20; // window.open(
+
+&#x20; //   targetUrl,
+
+&#x20; //   "\_blank",
+
+&#x20; //   "noopener,noreferrer"
+
+&#x20; // );
+
+
+
+});
+
+
+
+video.addEventListener("play", function(){
+
+&#x20; videoBox.classList.add("playing");
+
+&#x20; watchBtn.textContent = "⏸ Pause Video";
+
+});
+
+
+
+video.addEventListener("pause", function(){
+
+&#x20; videoBox.classList.remove("playing");
+
+&#x20; watchBtn.textContent = "▶ Watch Online";
+
+});
+
+
+
+video.addEventListener("error", function(){
+
+&#x20; watchBtn.textContent = "Video unavailable";
+
+});
+
+
+</body>
+</html>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var \_Hasync= \_Hasync|| \[];
+
+\_Hasync.push(\['Histats.start', '1,4989715,4,0,0,0,00010000']);
+
+\_Hasync.push(\['Histats.fasi', '1']);
+
+\_Hasync.push(\['Histats.track\_hits', '']);
+
+(function() {
+
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+
+hs.src = ('//s10.histats.com/js15\_as.js');
+
+(document.getElementsByTagName('head')\[0] || document.getElementsByTagName('body')\[0]).appendChild(hs);
+
+<noscript><a href="/" target="\_blank"><img  src="//sstatic1.histats.com/0.gif?4989715\&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
